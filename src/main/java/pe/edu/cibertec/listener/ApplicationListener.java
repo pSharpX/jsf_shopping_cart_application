@@ -15,23 +15,12 @@ import javax.servlet.ServletContextListener;
 public class ApplicationListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        EntityManagerFactory emf = this.getEntityManagerFactory();
         ModelMapper mapper = this.getModelMapper();
-        sce.getServletContext().setAttribute("emf", emf);
         sce.getServletContext().setAttribute("mapper", mapper);
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        EntityManagerFactory emf = (EntityManagerFactory)
-                sce.getServletContext().getAttribute("emf");
-        if (emf != null) {
-            emf.close();
-        }
-    }
-
-    private EntityManagerFactory getEntityManagerFactory(){
-        return Persistence.createEntityManagerFactory( "labjpa" );
     }
 
     private ModelMapper getModelMapper(){

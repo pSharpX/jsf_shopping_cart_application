@@ -12,7 +12,6 @@ import pe.edu.cibertec.service.UsuarioService;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.NoResultException;
 
 /**
  * Created by CHRISTIAN on 13/04/2018.
@@ -28,10 +27,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     @UsuarioRepositorioProducer
     private UsuarioRepositorio usuarioRepositorio;
 
-    /*@Inject
-    @PersistenceContext(unitName = "labjpa")
-    private EntityManager entityManager;*/
-
     public UsuarioServiceImpl(){
     }
 
@@ -44,11 +39,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public boolean existe(String username, String password) {
         try {
-            Usuario usuario = this.usuarioRepositorio.buscar(username, password);
+            Usuario usuario = this.usuarioRepositorio.obtenerPorNombreYApellido(username, password);
             if(usuario == null)
                 return false;
             return true;
-        }catch (NoResultException ex){
+        }catch (Exception ex){
             return false;
         }
     }

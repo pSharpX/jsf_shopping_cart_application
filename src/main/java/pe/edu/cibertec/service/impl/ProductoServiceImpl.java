@@ -18,11 +18,9 @@ import javax.inject.Named;
 import javax.transaction.Transactional;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -30,8 +28,6 @@ import java.util.stream.Collectors;
  */
 //@Named("productoService")
 @Stateless(name = "productoService")
-@TransactionManagement(TransactionManagementType.CONTAINER)
-@Transactional(Transactional.TxType.REQUIRED)
 public class ProductoServiceImpl implements ProductoService {
 
     @Inject
@@ -83,7 +79,7 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    //@TransactionAttribute(TransactionAttributeType.REQUIRED)
+    @org.mybatis.cdi.Transactional
     public ProductoModel crear(ProductoModel productoModel) {
         Producto producto = fromProductoModelToProducto(productoModel);
         this.productoRepositorio.crear(producto);

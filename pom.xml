@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>pe.edu.cibertec</groupId>
-	<artifactId>jsfcrudapplication</artifactId>
+	<artifactId>shoppingcartapplication</artifactId>
 	<version>1.0.0</version>
 	<packaging>war</packaging>
 
@@ -15,7 +15,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<application.name>jsfcrudapplication</application.name>
+		<application.name>shoppingcartapplication</application.name>
 		<application.version>1.0.0</application.version>
 		<java.version>1.8</java.version>
 	</properties>
@@ -106,8 +106,13 @@
 		</dependency>-->
 		<dependency>
 			<groupId>pe.edu.cibertec</groupId>
-			<artifactId>labjpa</artifactId>
+			<artifactId>labmybatis</artifactId>
 			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-cdi</artifactId>
+			<version>1.0.3</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->

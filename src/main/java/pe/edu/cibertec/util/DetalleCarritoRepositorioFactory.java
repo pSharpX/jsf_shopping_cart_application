@@ -1,25 +1,26 @@
 package pe.edu.cibertec.util;
 
+import org.apache.ibatis.session.SqlSession;
 import pe.edu.cibertec.producer.DetalleCarritoRepositorioProducer;
+import pe.edu.cibertec.producer.MySqlDatabaseProducer;
 import pe.edu.cibertec.repositorio.DetalleCarritoRepositorio;
-import pe.edu.cibertec.repositorio.impl.DetalleCarritoJpaRepositorioImpl;
+import pe.edu.cibertec.repositorio.impl.MyBatisDetalleCarritoRepositorioImpl;
 
 import javax.enterprise.inject.Produces;
-import javax.faces.context.FacesContext;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import javax.inject.Inject;
 
 /**
  * Created by CHRISTIAN on 22/04/2018.
  */
 public class DetalleCarritoRepositorioFactory {
 
+    @Inject
+    @MySqlDatabaseProducer
+    private SqlSession sqlSession;
+
     @Produces
     @DetalleCarritoRepositorioProducer
-    public DetalleCarritoRepositorio createDetalleCarritoRepositorio(){
-        EntityManagerFactory emf = (EntityManagerFactory) FacesContext.getCurrentInstance().getExternalContext()
-                .getApplicationMap().get("emf");
-        EntityManager em = emf.createEntityManager();
-        return new DetalleCarritoJpaRepositorioImpl().setEntityManager(em);
+    public DetalleCarritoRepositorio createDetalleCarritoRepositorio(@MySqlDatabaseProducer SqlSession sqlSession){
+        return new MyBatisDetalleCarritoRepositorioImpl(sqlSession);
     }
 }
